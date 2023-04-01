@@ -1,18 +1,32 @@
 const dotenv = require('dotenv');
 dotenv.config({ path: "./config.env" });
 const express = require('express');
-
-
+const bodyParser = require("body-parser");
+const ejs = require("ejs");
 
 const app = express();
 
-const owner = 'pallets';
-const repo = 'flask';
+app.set('view engine','ejs');
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static("public"));
+
 const accessToken = process.env.YOUR_ACCESS_TOKEN;
 
-app.get('/', async (req, res) => {
+app.get('/',(req,res)=>{
+  res.render('home');
+});
 
-  const { default: fetch } = await import('node-fetch');
+app.get('/dashboard',(req,res)=>{
+  res.render('dashboard');
+});
+
+app.post('/dash', async(req,res)=>{
+  const owner = req.body.userName;
+  const repo = req.body.repoName;
+  
+  try{
+
+    const { default: fetch } = await import('node-fetch');
   
   // Retrieve summary of the project's and techstacks used
   const projectSummmary = await fetch(`https://api.github.com/repos/${owner}/${repo}`,{
@@ -79,39 +93,30 @@ app.get('/', async (req, res) => {
 
 
   // Send the data to the client
-  res.send(`
-    <h1>Project Status</h1>
-    <ul>
-      <li>${projectName}</li>
-      <li>${projectDescription}</li>
-      <li>${projectURL}</li>
-      <li>${language}</li>
-      <li>Stars : ${stars} and forks : ${forks}</li>
-      <li>Open issues: ${openIssues.map(issue =>{
-        return issue.title;
-      })}</li>
-      <li>Closed issues: ${closedIssues.map(issue => {
-        return issue.title;
-      })}</li>
-      <h1>Open Pull Requests</h1>
-      <li>${pullData.map(pull =>{
-        return pull.title
-      })}</li>
-      <li>${contributionsData.sort((a,b) => b.total-a.total).map(contributor => {
-        return (
-          `
-          <p>${contributor.author.login} ${contributor.total}</p>
-          `
-        );
-      })}</li>
-      <li>${commitsData.map(commit =>{
-        return `<p>${commit.commit.message}</p>`
-      })}</li>
-      <li>Released version: ${version} Date: ${date}</li>
-    </ul>
-  `);
-});
 
+  res.render("dashboard",{
+    projectName:projectName,
+    projectDescription:projectDescription,
+    projectURL:projectURL,
+    language:language,
+    stars:stars,
+    forks:forks,
+    openIssues:openIssues,
+    closedIssues:closedIssues,
+    pullData:pullData,
+    contributionsData:contributionsData,
+    commitsData: commitsData,
+    version:version,
+    date:date
+  
+  
+  });
+
+  }catch (error){
+    console.log(error);
+    res.send('Error occurred');
+  }
+});
 
 
 module.exports.main = app;

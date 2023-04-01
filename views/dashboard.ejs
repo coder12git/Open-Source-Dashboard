@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title>Open-Source-Dashboard</title>
+    </head>
+    <body>
+        <h1>Project Status</h1>
+    <ul>
+      <li><%=projectName%></li>
+      <li><%=projectDescription%></li>
+      <li><%=projectURL%></li>
+      <li><%= language %></li>
+      <li>Stars : <%= stars %> and forks : <%= forks %></li>
+      <h1>Issues</h1>
+      <%openIssues.forEach(function(issue){%>
+        <p><%=issue.title %></p>
+      <%});%>
+      <%closedIssues.forEach(function(issue){%>
+        <p><%=issue.title %></p>
+      <%});%>
+
+      <h1>Open Pull Requests</h1>
+      <%pullData.forEach(function(pull){%>
+        <p><%=pull.title %></p>
+      <%});%>
+      
+      <h1>Contributors</h1>
+      <%contributionsData.sort((a,b) => b.total-a.total).forEach(function(contributor){%>
+        <p><%=contributor.author.login %> <%= contributor.total %></p>
+      <%});%>
+      
+      <h1>Commits</h1>
+      <%commitsData.forEach(function(commit){%>
+        <p><%=commit.commit.message %></p>
+      <%});%>
+      
+      <h2>Released Version and released date</h2>
+      <li>Released version: <%= version%>  Date: <%= date%></li>
+    </ul>
+    </body>
+</html>
