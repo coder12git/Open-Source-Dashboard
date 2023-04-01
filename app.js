@@ -20,7 +20,11 @@ app.get("/dashboard", (req, res) => {
   res.render("dashboard");
 });
 
-app.post("/dash", async (req, res) => {
+app.get("/dashboard", (req, res) => {
+  res.render("dashboard");
+});
+
+app.post("/dashboard", async (req, res) => {
   const owner = req.body.userName;
   const repo = req.body.repoName;
 
