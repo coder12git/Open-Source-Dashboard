@@ -20,7 +20,7 @@ This project is submitted for [MLH - OpenHacks 2023 Hackathon](https://openhacks
 
 
 
-- [Project Demo](https://youtu.be/MtL7ERfRdGw)
+- [Project Demo](https://youtu.be/0miU9CGypJw)
 
 
 
@@ -50,7 +50,7 @@ A web app that displays the status of an **open-source project**, that can help 
 
 
 - EJS: For webpage templating
-- Github API - To retrieve data about the project
+- Github API: To retrieve data about the project
 
 ## What it does?
 
