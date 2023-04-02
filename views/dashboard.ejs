@@ -37,35 +37,35 @@
       <br />
       <br />
       <br />
-      <div class="row content" style="padding-left: 15rem">
-        <div class="col-sm-9">
+      <div class="row content">
+        <div class="col-sm-12">
           <div class="well">
-            <h1><%=projectName%></h1>
+            <h1><strong><%=projectName%></strong></h1>
             <p><%=projectDescription%></p>
             <a href="<%=projectURL%>"><%=projectURL%></a>
           </div>
           <div class="row">
             <div class="col-sm-3">
               <div class="well">
-                <h4>Language</h4>
+                <h4><strong>Language</strong></h4>
                 <p><%= language %></p>
               </div>
             </div>
             <div class="col-sm-3">
               <div class="well">
-                <h4>Stars</h4>
+                <h4><strong>Stars</strong></h4>
                 <p><%= stars %></p>
               </div>
             </div>
             <div class="col-sm-3">
               <div class="well">
-                <h4>Forks</h4>
+                <h4><strong>Forks</strong></h4>
                 <p><%= forks %></p>
               </div>
             </div>
             <div class="col-sm-3">
               <div class="well">
-                <h4>Released Version</h4>
+                <h4><strong>Released Version</strong></h4>
                 <p><%= version%></p>
               </div>
             </div>
@@ -73,7 +73,9 @@
           <div class="row">
             <div class="col-sm-4">
               <div class="well">
-                <h4 style="text-align: center">Open Issues</h4>
+                <h4 style="text-align: center">
+                  <strong>Open Issues-<%= openIssues.length %></strong>
+                </h4>
                 <ul>
                   <%openIssues.forEach(function(issue){%>
                   <li><%=issue.title %></li>
@@ -83,7 +85,9 @@
             </div>
             <div class="col-sm-4">
               <div class="well">
-                <h4 style="text-align: center">Closed Issues</h4>
+                <h4 style="text-align: center">
+                  <strong>Closed Issues-<%= closedIssues.length %></strong>
+                </h4>
                 <ul>
                   <%closedIssues.forEach(function(issue){%>
                   <li><%=issue.title %></li>
@@ -93,7 +97,9 @@
             </div>
             <div class="col-sm-4">
               <div class="well">
-                <h4 style="text-align: center">Open Pull Requests</h4>
+                <h4 style="text-align: center">
+                  <strong>Open Pull Requests-<%= pullData.length %></strong>
+                </h4>
                 <ul>
                   <%pullData.forEach(function(pull){%>
                   <li><%=pull.title %></li>
@@ -105,7 +111,9 @@
           <div class="row">
             <div class="col-sm-8">
               <div class="well">
-                <h4 style="text-align: center">Contributors</h4>
+                <h4 style="text-align: center">
+                  <strong>Contributors-<%= contributionsData.length %></strong>
+                </h4>
                 <%contributionsData.sort((a,b) =>
                 b.total-a.total).forEach(function(contributor){%>
                 <p><%=contributor.author.login %> <%= contributor.total %></p>
@@ -114,7 +122,9 @@
             </div>
             <div class="col-sm-4">
               <div class="well">
-                <h4 style="text-align: center">Commits</h4>
+                <h4 style="text-align: center">
+                  <strong>Commits-<%= commitsData.length %></strong>
+                </h4>
                 <ul>
                   <%commitsData.forEach(function(commit){%>
                   <li><%=commit.commit.message %></li>
